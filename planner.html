@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Planner Activity</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">MY PORTFOLIO</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="planner.html" class="active">Planner</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="search-box"><input type="text"><button>Go</button></div>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Interactive Task Management Engine</h2>
+        <p style="margin-bottom: 1rem;">Add your upcoming tests, lab deadlines, or research tasks to statefully interact with the DOM.</p>
+
+        <section class="card">
+            <div class="planner-controls">
+                <input type="text" id="taskInput" placeholder="Enter task name here...">
+                <button class="btn" id="addTaskBtn">Add Task Item</button>
+            </div>
+
+            <ul class="task-list" id="taskList"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">WhatsApp</a> <a href="#">TikTok</a> <a href="#">X</a>
+        </div>
+    </footer>
+
+    <script src="planner.js"></script>
+</body>
+</html>

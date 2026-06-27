@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA — Radiant, Natural Skincare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #2C3E35;       /* Deep Earthy Sage */
+            --secondary: #D4AF37;     /* Soft Gold Accent */
+            --bg-cream: #FDFBF7;      /* Warm Off-White */
+            --bg-blush: #F5EBE6;      /* Soft Blush/Nude */
+            --text-dark: #333333;     /* Soft Black */
+            --text-light: #666666;    /* Muted Gray */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- REUSABLE COMPONENTS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(44, 62, 53, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-cream) 60%, var(--bg-blush) 100%);
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-sub {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 4.5rem;
+            font-weight: 400;
+            color: var(--primary);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img {
+            width: 85%;
+            border-radius: 300px 300px 0 0; /* Elegant arch shape */
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(44, 62, 53, 0.1);
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: 10%;
+            left: 0;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            font-style: italic;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid var(--bg-blush);
+        }
+
+        /* --- CURATED PRODUCTS --- */
+        .products {
+            padding: 8rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(44, 62, 53, 0.05);
+        }
+
+        .product-img-holder {
+            background-color: var(--bg-cream);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img-holder img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 0 0.5rem 0.5rem;
+        }
+
+        .product-cat {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-name {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* --- PHILOSOPHY SECTION --- */
+        .philosophy {
+            background-color: var(--bg-blush);
+            padding: 8rem 0;
+        }
+
+        .philo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .philo-img {
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .features-list {
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-serif);
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            margin-bottom: 1rem;
+            font-family: var(--font-sans);
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 992px) {
+            .hero-title { font-size: 3.2rem; }
+            .section-title { font-size: 2.5rem; }
+            .hero-grid, .philo-grid, .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .hero-image-wrapper { order: -1; }
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: var(--bg-cream);
+                width: 100%;
+                text-align: center;
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                transition: var(--transition);
+            }
+            .nav-links.active { right: 0; }
+            .burger { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">AURA</a>
+            <ul class="nav-links">
+                <li><a href="#shop">Shop All</a></li>
+                <li><a href="#philosophy">Our Story</a></li>
+                <li><a href="#ingredients">Ingredients</a></li>
+                <li><a href="#journal">Journal</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#shop" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">Shop</a>
+                <div class="burger" id="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text-content">
+                <p class="hero-sub">100% Organic & Vegan</p>
+                <h1 class="hero-title">Skin therapy, curated by nature.</h1>
+                <p class="hero-desc">Experience botanical, cleanly formulated solutions designed to honor, nurture, and elevate your skin’s natural radiance.</p>
+                <div class="hero-buttons">
+                    <a href="#shop" class="btn btn-primary">Explore Collection</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1608248597481-496100c8c836?q=80&w=1000&auto=format&fit=crop" alt="Aura Skincare Bottle" class="hero-img">
+                <div class="hero-badge">Dermatologist Approved</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Daily Ritual</h2>
+                <p>Our best-selling foundational essentials engineered to target hydration, elasticity, and brilliant clarity.</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img-holder">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600&auto=format&fit=crop" alt="Serum">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-cat">Hydrate</p>
+                        <h3 class="product-name">Ethereal Glow Serum</h3>
+                        <p class="product-price">$48.00</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img-holder">
+                        <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=600&auto=format&fit=crop" alt="Cleanser">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-cat">Cleanse</p>
+                        <h3 class="product-name">Botanical Milk Cleanser</h3>
+                        <p class="product-price">$36.00</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img-holder">
+                        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600&auto=format&fit=crop" alt="Cream">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-cat">Moisturize</p>
+                        <h3 class="product-name">Ceramide Barrier Cream</h3>
+                        <p class="product-price">$54.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+        <div class="container philo-grid">
+            <div>
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1000&auto=format&fit=crop" alt="Natural Elements" class="philo-img">
+            </div>
+            <div>
+                <h2 class="section-title">Formulations guided by pure intention.</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">We balance ancient botanical wisdom with rigorous modern science to extract ingredients that cooperate perfectly with human dermal cells.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div>
+                            <h4 class="feature-title">Cold-Pressed Botanicals</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Preserving maximum nutrient density without high-heat corruption.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div>
+                            <h4 class="feature-title">Zero Synthetic Additives</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Free from parabens, phthalates, artificial sulfating, and fillers.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div>
+                            <h4 class="feature-title">Cruelty-Free Always</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Ethically sourced, thoughtfully packaged in recycled amber glass.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">AURA</div>
+                <p style="font-size: 0.9rem; max-width: 280px; color: rgba(255,255,255,0.6)">Sustaining elegant dermal health through conscious, cleanly engineered botanicals.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">Serums</a></li>
+                    <li><a href="#">Cleansers</a></li>
+                    <li><a href="#">Moisturizers</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Sourcing Roots</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Join Aura</h4>
+                <p style="font-size: 0.85rem; margin-bottom: 1rem; color: rgba(255,255,255,0.6)">Subscribe for 15% off your initial clean beauty ritual.</p>
+                <input type="email" placeholder="Your email address" class="newsletter-input">
+                <button class="btn btn-primary" style="background:#fff; color:var(--primary); width: 100%; font-size:0.8rem; padding:0.6rem;">Subscribe</button>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 AURA Organics Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.querySelector('.nav-links');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Animated hamburger transformation
+            burger.classList.toggle('toggle');
+        });
+    </script>
+</body>
+</html>
