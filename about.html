@@ -18,13 +18,17 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <button type="button">Go</button>
-            </div>
+            
         </nav>
     </header>
+<div class="search-box">
+    <input type="text" placeholder="Search..." id="search-input">
+    <button type="button" onclick="executeSearch()">Go</button>
+    
+    <div id="search-results"></div>
+</div>
 
+<script src="search.js"></script>
     <main>
         <h2>About Me</h2>
         <div class="grid-layout">

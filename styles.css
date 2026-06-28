@@ -407,3 +407,38 @@ footer p {
         padding: 2.5rem 1rem;
     }
 }
+/* 1. Limit the width of the container holding the bar and button */
+.search-box {
+    position: relative;
+    display: inline-flex;  /* Keeps the input and button neatly inline */
+    align-items: center;
+    max-width: 300px;      /* Restricts the total width of the search bar */
+    width: 100%;           /* Allows it to be responsive on mobile screens */
+    margin: 15px 0;        /* Adds a little spacing above and below */
+}
+
+/* 2. Target the text input itself */
+.search-box input[type="text"] {
+    width: 100%;           /* Makes the input fill up the 300px container */
+    padding: 8px 12px;     /* Adds comfortable breathing room inside the box */
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px; /* Rounds the left corners */
+    outline: none;
+    box-sizing: border-box; /* Crucial: includes padding in total width calculation */
+}
+
+/* 3. Target the 'Go' button to sit flush next to it */
+.search-box button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-left: none;     /* Removes double border between input and button */
+    background-color: #1e293b; /* A clean dark color matching your button theme */
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0; /* Rounds the right corners */
+    box-sizing: border-box;
+}
+
+.search-box button:hover {
+    background-color: #334155; /* Slight color shift on hover */
+}
